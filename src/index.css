@@ -1,13 +1,78 @@
-body {
+* {
+  box-sizing: border-box;
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-weight: 500 !important;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.input-checkbox-active {
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.input-check-error {
+  border: 1px solid red;
+}
+
+li {
+  list-style: none;
+
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover,
+a:focus {
+  color: black;
+}
+
+.form-check,
+.form-switch {
+  padding-left: 0px !important;
+}
+
+.all {
+  background-color: yellow !important;
+}
+
+.pending {
+  color: white !important;
+  background: #3b82f6 !important;
+}
+
+.confirmed {
+  color: white !important;
+  background: green !important;
+}
+
+.canceled {
+  color: white !important;
+  background: #e11d48 !important;
+}
+
+th {
+  font-weight: 500;
+}
+
+tbody {
+
+  width: 100%;
+
+}
+
+tbody tr {
+  background-color: white;
+  padding: 10px 0px;
+  margin-top: 10px !important;
 }
