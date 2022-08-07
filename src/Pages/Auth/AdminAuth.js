@@ -10,15 +10,18 @@ const AdminAuth = () => {
         credential: "",
         password: ""
     })
+    const [adding, setIsAdding] = useState(false)
     const navigate = useNavigate();
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
     const handleSubmit = async () => {
         try {
+            setIsAdding(true);
             const { data } = await axios.post(API_URL + "/admin/login", formData);
             console.log(data)
             localStorage.setItem('adminToken', data.token);
+            setIsAdding(false)
             navigate('/admin-products')
         } catch (error) {
             toast.error(error.error)
@@ -58,8 +61,9 @@ const AdminAuth = () => {
                         padding: "5px 40px"
 
                     }}
+                        disabled={adding}
                         onClick={handleSubmit}
-                    >Sign in</button>
+                    >{adding ? "Signing in.." : "Sign in"}</button>
                 </div>
 
 

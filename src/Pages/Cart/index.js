@@ -14,6 +14,7 @@ const Cart = () => {
     const [isChecked, setChecked] = useState(false)
     const [showChecked, setShowChecked] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [adding, setIsAdding] = useState(false);
 
     useEffect(() => {
         setCart(cart)
@@ -54,7 +55,9 @@ const Cart = () => {
 
     const handleOrder = async () => {
         try {
+
             if (localStorage.getItem('token') && isChecked) {
+                setIsAdding(true)
                 await axios.post(API_URL + "/order/place-order", {
                     cart: localStorage.getItem('cart')
                 }, {
@@ -64,6 +67,7 @@ const Cart = () => {
                 });
 
                 setShowModal(true);
+                setIsAdding(false)
             } else if (!localStorage.getItem('token')) {
                 navigate("/user-auth")
             } else if (!isChecked) {
@@ -128,8 +132,9 @@ const Cart = () => {
                                         backgroundColor: "#facc15",
                                         outline: "none"
                                     }}
+                                        disabled={adding}
                                         onClick={handleOrder}
-                                    >CHECKOUT</button>
+                                    >{adding ? "CHECKING OUT..." : "CHECKOUT"}</button>
                                 </div>
                             </div>
                         </div>

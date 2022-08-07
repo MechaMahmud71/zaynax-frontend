@@ -4,9 +4,11 @@ import React, { useEffect, useState } from 'react'
 import Product from '../../components/Product'
 import UserNav from '../../components/UserNav';
 import { API_URL } from '../../Utils/api';
+import Loading from '../../components/Loading';
 
 export const Home = () => {
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const [cart, setCart] = useState({
         products: [],
@@ -26,8 +28,10 @@ export const Home = () => {
 
     async function getProducts() {
         try {
+            setLoading(true);
             const { data: { data } } = await axios.get(API_URL + "/product/products");
             setProducts(data)
+            setLoading(false);
         } catch (error) {
             setProducts([])
         }
@@ -53,9 +57,12 @@ export const Home = () => {
         }
     }
 
+
+
     return (
         <>
             <UserNav setProducts={setProducts} />
+
             <div style={{
                 backgroundColor: "#f1f5f9",
                 width: "100vw",
@@ -64,7 +71,13 @@ export const Home = () => {
 
             }}>
                 <div className='container'>
-                    <div className="row">
+                    {loading && <div style={{
+                        backgroundColor: "#f1f5f9"
+                    }} className='d-flex pt-5 justify-content-center align-items-center'>
+                        <Loading />
+                        <div>Loading...</div>
+                    </div>}
+                    {!loading && <div className="row">
                         {products && products?.map((el, index) => (
                             <div onMouseEnter={() => {
                                 findOne(el)
@@ -75,7 +88,7 @@ export const Home = () => {
                                 <Product isAdded={isAdded} product={el} setCart={setCart} setIsAdded={setIsAdded} />
                             </div>
                         ))}
-                    </div>
+                    </div>}
                 </div>
             </div>
         </>
