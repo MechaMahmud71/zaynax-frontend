@@ -2,7 +2,8 @@ import React from 'react'
 import { IMAGE_URL } from '../Utils/api';
 
 const Product = ({ product, setCart, isAdded, setIsAdded }) => {
-    function handleAdd() {
+    function handleAdd(e) {
+        e.preventDefault();
         const newCart = JSON.parse(localStorage.getItem('cart'));
         newCart.products.push(product);
         newCart.subTotal += product.sellingPrice;

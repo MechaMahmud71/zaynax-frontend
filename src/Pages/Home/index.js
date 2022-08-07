@@ -24,7 +24,8 @@ export const Home = () => {
         if (!localStorage.getItem('cart')) {
             localStorage.setItem('cart', JSON.stringify(cart))
         }
-    }, [cart])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     async function getProducts() {
         try {
